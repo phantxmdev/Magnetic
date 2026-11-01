@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magnetic UI — увидь невидимое поле</title>
+  <meta name="description" content="Magnetic UI превращает магнитометр телефона в красивый инструмент: измеряет поле в µТ и оживляет феррожидкость рядом с магнитом. Бесплатная бета для Android." />
+  <meta name="theme-color" content="#050505" />
+  <meta property="og:title" content="Magnetic UI — увидь невидимое поле" />
+  <meta property="og:description" content="Поднеси магнит к телефону и посмотри, как оживает феррожидкость. Бесплатная бета для Android." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <div class="bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="grid"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- Навигация -->
+  <header class="nav-wrap">
+    <nav class="nav glass" id="nav">
+      <a href="#top" class="logo"><i class="logo-dot"></i>Magnetic UI</a>
+      <ul class="links">
+        <li><a href="#features">Возможности</a></li>
+        <li><a href="#demo">Демо</a></li>
+        <li><a href="#how">Как это работает</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+      </ul>
+      <a href="#download" class="btn btn-small magnetic"><span>Скачать</span></a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <div class="pill glass reveal"><i class="dot"></i> Бета для Android · бесплатно</div>
+
+        <h1 class="title" data-split>Увидь <em>невидимое</em> магнитное поле</h1>
+
+        <p class="lead reveal" style="--d:.3s">
+          Magnetic UI превращает магнитометр телефона в красивый инструмент:
+          измеряет поле в&nbsp;µT и заставляет феррожидкость оживать, когда рядом магнит.
+        </p>
+
+        <div class="actions reveal" style="--d:.45s">
+          <a href="#download" class="btn btn-solid magnetic"><span>Скачать бету</span></a>
+          <a href="#demo" class="btn btn-ghost magnetic"><span>Попробовать демо</span></a>
+        </div>
+
+        <p class="meta-line reveal" style="--d:.6s">Протестировано на Xiaomi 17T Pro</p>
+      </div>
+
+      <div class="hero-phone reveal" style="--d:.2s">
+        <div class="phone glass" id="phone" data-view="detector">
+          <div class="screen" id="screen">
+            <div class="cam"></div>
+
+            <!-- Вид: Детектор -->
+            <div class="view v-detector">
+              <div class="glow" id="glow"></div>
+              <div class="d-head">
+                <h4>Magnetic UI</h4>
+                <div class="round-btns"><i>?</i><i>↻</i></div>
+              </div>
+
+              <div class="dial" id="dial">
+                <div class="dial-num" id="ut">48</div>
+                <div class="dial-unit">µT</div>
+              </div>
+
+              <div class="chips">
+                <span id="cx">X: 0</span>
+                <span id="cy">Y: 0</span>
+                <span id="cz">Z: 0</span>
+                <span class="on" id="cd">Δ 0</span>
+              </div>
+
+              <div class="card-mini">
+                <div>
+                  <small>Пиковое значение</small>
+                  <strong id="peak">48 µT</strong>
+                </div>
+                <button type="button" class="reset" id="reset">Сброс</button>
+              </div>
+
+              <div class="card-mini vib">
+                <span class="vib-ico">≋</span>
+                <span class="vib-label">Виброотклик</span>
+                <span class="toggle on" id="toggle"><i></i></span>
+              </div>
+            </div>
+
+            <!-- Вид: Феррожидкость -->
+            <div class="view v-fluid">
+              <h4 class="f-title">Феррожидкость</h4>
+              <p class="f-sub">Поднесите магнит к экрану</p>
+              <div class="f-box"><canvas id="heroCanvas"></canvas></div>
+            </div>
+
+            <!-- Переключатель -->
+            <div class="tabs" id="tabs">
+              <span class="tab-ind"></span>
+              <button type="button" data-view="detector" class="active">Детектор</button>
+              <button type="button" data-view="fluid">Жидкость</button>
+            </div>
+          </div>
+        </div>
+        <p class="phone-cap">Демо в браузере — води курсором или пальцем по экрану</p>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- Бегущая строка -->
+    <section class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Магнитометр</span><i>✦</i><span>Феррожидкость</span><i>✦</i><span>Виброотклик</span><i>✦</i><span>Оси X · Y · Z</span><i>✦</i><span>Пик в µT</span><i>✦</i>
+        <span>Магнитометр</span><i>✦</i><span>Феррожидкость</span><i>✦</i><span>Виброотклик</span><i>✦</i><span>Оси X · Y · Z</span><i>✦</i><span>Пик в µT</span><i>✦</i>
+      </div>
+    </section>
+
+    <!-- Возможности -->
+    <section class="section" id="features">
+      <header class="section-head reveal">
+        <span class="eyebrow">01 — Возможности</span>
+        <h2>Простой инструмент.<br /><em>Необычный отклик.</em></h2>
+      </header>
+
+      <div class="bento">
+        <article class="card glass spot reveal tilt span-2">
+          <span class="num">01</span>
+          <h3>Детектор поля</h3>
+          <p>Значение в µT в реальном времени, оси X, Y, Z и общее отклонение Δ. Плавный счётчик и пульсирующее кольцо.</p>
+        </article>
+
+        <article class="card glass spot reveal tilt" style="--d:.08s">
+          <span class="num">02</span>
+          <h3>Феррожидкость</h3>
+          <p>Частицы тянутся к магниту — красиво и завораживает.</p>
+        </article>
+
+        <article class="card glass spot reveal tilt" style="--d:.16s">
+          <span class="num">03</span>
+          <h3>Виброотклик</h3>
+          <p>Телефон мягко вибрирует, когда магнит рядом.</p>
+        </article>
+
+        <article class="card glass spot reveal tilt span-2" style="--d:.24s">
+          <span class="num">04</span>
+          <h3>Пиковое значение</h3>
+          <p>Приложение запоминает максимум — удобно сравнивать магниты между собой. Сброс одним касанием.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Цифры -->
+    <section class="section stats-wrap">
+      <div class="stats glass spot reveal">
+        <div><strong>2</strong><span>режима</span></div>
+        <div><strong>3</strong><span>оси X · Y · Z</span></div>
+        <div><strong>0&nbsp;₽</strong><span>стоимость</span></div>
+        <div><strong>µT</strong><span>точные единицы</span></div>
+      </div>
+    </section>
+
+    <!-- Демо -->
+    <section class="section" id="demo">
+      <header class="section-head reveal">
+        <span class="eyebrow">02 — Демо</span>
+        <h2>Попробуй <em>прямо здесь</em></h2>
+      </header>
+
+      <div class="demo glass spot reveal">
+        <canvas id="demoCanvas"></canvas>
+        <div class="demo-hint pill glass"><i class="dot"></i> Води курсором или пальцем · зажми — магнит сильнее</div>
+      </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section class="section" id="how">
+      <header class="section-head reveal">
+        <span class="eyebrow">03 — Как это работает</span>
+        <h2>Три шага <em>до эффекта</em></h2>
+      </header>
+
+      <div class="steps">
+        <div class="step glass spot reveal"><b>I</b><h3>Скачай бету</h3><p>Установи APK на Android. Приложение бесплатное.</p></div>
+        <div class="step glass spot reveal" style="--d:.08s"><b>II</b><h3>Выбери режим</h3><p>«Детектор» для измерений или «Жидкость» для красоты.</p></div>
+        <div class="step glass spot reveal" style="--d:.16s"><b>III</b><h3>Поднеси магнит</h3><p>На тестовом телефоне магнитометр находится за левым верхним углом экрана. Прикладывай магнит прямо туда.</p></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <header class="section-head reveal">
+        <span class="eyebrow">04 — Вопросы</span>
+        <h2>Частые <em>вопросы</em></h2>
+      </header>
+
+      <div class="faq">
+        <details class="glass reveal">
+          <summary>Какие телефоны подойдут?</summary>
+          <p>Любой Android-смартфон со встроенным магнитометром — он есть почти во всех современных моделях. Приложение тестировалось на Xiaomi 17T Pro. Положение датчика на других моделях может отличаться.</p>
+        </details>
+        <details class="glass reveal" style="--d:.06s">
+          <summary>Почему без магнита значение не нулевое?</summary>
+          <p>Датчик всегда измеряет магнитное поле Земли — обычно около 25–65 µT. Это нормально и означает, что всё работает.</p>
+        </details>
+        <details class="glass reveal" style="--d:.12s">
+          <summary>Какой магнит нужен?</summary>
+          <p>Подойдёт любой: от холодильника, неодимовый, из колонки. Чем он сильнее, тем ярче отклик. Сильные магниты держите подальше от банковских карт, часов и медицинских имплантов.</p>
+        </details>
+        <details class="glass reveal" style="--d:.18s">
+          <summary>Это бесплатно?</summary>
+          <p>Да, бета-версия полностью бесплатна.</p>
+        </details>
+        <details class="glass reveal" style="--d:.24s">
+          <summary>Как сообщить об ошибке или предложить идею?</summary>
+          <p>Напиши на <a href="mailto:ila491501@gmail.com">ila491501@gmail.com</a> — отвечу и учту в следующих версиях.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Скачать -->
+    <section class="section" id="download">
+      <div class="cta glass spot reveal">
+        <span class="eyebrow">05 — Скачать</span>
+        <h2>Бета уже <em>доступна</em></h2>
+        <p>Для Android. Бесплатно. Помоги сделать приложение лучше — напиши, что понравилось и что сломалось.</p>
+
+        <div class="actions">
+          <!-- ЗАМЕНИ ссылку на свою: GitHub Releases, RuStore или Google Play -->
+          <a href="https://github.com/ВАШ_ЛОГИН/ВАШ_РЕПОЗИТОРИЙ/releases/latest" class="btn btn-solid btn-big magnetic" id="apk"><span>Скачать APK</span></a>
+          <a href="mailto:ila491501@gmail.com?subject=Magnetic%20UI%20—%20отзыв" class="btn btn-ghost btn-big magnetic"><span>Оставить отзыв</span></a>
+        </div>
+
+        <p class="note">Перед установкой APK разреши установку из неизвестных источников в настройках телефона.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Magnetic UI</span>
+    <a href="#top" class="to-top">Наверх ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
