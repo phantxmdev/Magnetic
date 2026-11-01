@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Скачать Magnetic UI</title>
+  <meta name="description" content="Скачай бету Magnetic UI для Android — файл сразу окажется в загрузках." />
+  <meta name="theme-color" content="#050505" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="download.css" />
+</head>
+<body>
+
+  <div class="bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="grid"></div>
+    <div class="grain"></div>
+  </div>
+
+  <a href="index.html" class="back glass"><span>←</span> На главную</a>
+
+  <main class="dl-page">
+    <section class="dl-card glass spot reveal" id="card">
+
+      <div class="dl-icon" aria-hidden="true">
+        <i class="dl-orb"></i>
+        <i class="dl-ray r1"></i><i class="dl-ray r2"></i><i class="dl-ray r3"></i>
+      </div>
+
+      <span class="eyebrow">Бета · Android</span>
+      <h1>Magnetic <em>UI</em></h1>
+      <p class="sub">Измеряй магнитное поле и смотри, как оживает феррожидкость. Бесплатно.</p>
+
+      <!--
+        ВАЖНО: положи APK в эту же папку и назови его Magnetic-UI.apk
+        (или поменяй имя в href ниже). Атрибут download заставляет браузер
+        сразу скачать файл в «Загрузки».
+      -->
+      <a href="Magnetic-UI.apk" download="Magnetic-UI-beta.apk" class="btn btn-solid btn-big dl-btn magnetic" id="dl">
+        <span class="lbl">
+          <svg class="ico-dl" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+          <svg class="ico-ok" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          <b id="dlText">Скачать APK</b>
+        </span>
+        <i class="dl-bar" aria-hidden="true"></i>
+      </a>
+
+      <p class="file-info" id="info">Android · бета-версия</p>
+      <p class="warn" id="warn" hidden>Файл пока не загружен на сайт. Напиши на <a href="mailto:ila491501@gmail.com">ila491501@gmail.com</a>.</p>
+
+      <div class="after" id="after">
+        <h3>Файл уже в загрузках</h3>
+        <ol>
+          <li>Открой файл из уведомления или папки «Загрузки».</li>
+          <li>Если телефон попросит — разреши установку из неизвестных источников.</li>
+          <li>Запусти Magnetic UI и поднеси магнит к левому верхнему углу.</li>
+        </ol>
+      </div>
+
+      <p class="feedback">Нашёл ошибку или есть идея? <a href="mailto:ila491501@gmail.com?subject=Magnetic%20UI%20—%20отзыв">Напиши мне</a></p>
+    </section>
+  </main>
+
+  <script src="download.js"></script>
+</body>
+</html>

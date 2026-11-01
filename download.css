@@ -1,0 +1,88 @@
+/* Страница скачивания (дополняет style.css) */
+
+.back {
+  position: fixed; top: 18px; left: 18px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 999px; font-size: 14px; color: var(--muted);
+  transition: color .3s, transform .5s var(--ease);
+  animation: dropIn 1s var(--ease) both .2s;
+}
+.back span { transition: transform .5s var(--ease); }
+.back:hover { color: #fff; }
+.back:hover span { transform: translateX(-4px); }
+
+.dl-page {
+  min-height: 100svh; display: grid; place-items: center;
+  padding: 100px 20px 60px;
+}
+
+.dl-card {
+  width: min(560px, 100%); text-align: center;
+  padding: clamp(36px, 7vw, 60px) clamp(22px, 6vw, 52px);
+  border-radius: 40px;
+}
+.dl-card h1 { font-size: clamp(2.6rem, 8vw, 4.2rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.05; }
+.sub { color: var(--muted); max-width: 380px; margin: 18px auto 0; }
+
+/* Иконка-магнит */
+.dl-icon { position: relative; width: 96px; height: 96px; margin: 0 auto 30px; }
+.dl-orb {
+  position: absolute; inset: 24px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #e6e6e6 55%, #7c7c7c);
+  box-shadow: 0 0 40px 6px rgba(255,255,255,.35);
+  animation: breathe 3.2s ease-in-out infinite;
+}
+.dl-ray {
+  position: absolute; left: 50%; top: 50%; width: 1px; height: 100%;
+  margin: -48px 0 0 -.5px; background: linear-gradient(transparent, rgba(255,255,255,.35), transparent);
+  animation: raySpin 14s linear infinite;
+}
+.dl-ray.r2 { transform: rotate(60deg); animation-duration: 18s; }
+.dl-ray.r3 { transform: rotate(120deg); animation-duration: 22s; animation-direction: reverse; }
+@keyframes breathe { 50% { transform: scale(1.12); box-shadow: 0 0 56px 10px rgba(255,255,255,.45); } }
+@keyframes raySpin { to { rotate: 360deg; } }
+
+/* Кнопка скачивания */
+.dl-btn { width: 100%; max-width: 360px; margin-top: 40px; padding: 20px 30px; font-size: 17px; }
+.dl-btn .lbl { display: inline-flex; align-items: center; gap: 12px; }
+.dl-btn svg { flex: none; transition: transform .5s var(--ease), opacity .4s; }
+.dl-btn .ico-ok { position: absolute; left: 0; opacity: 0; transform: scale(.4); }
+.dl-btn .ico-dl { animation: nudge 2.2s var(--ease) infinite; }
+@keyframes nudge { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(3px); } }
+.dl-bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: #000; transform: scaleX(0); transform-origin: 0 50%; opacity: .85; }
+
+.dl-btn.started { pointer-events: none; }
+.dl-btn.started .ico-dl { display: none; }
+.dl-btn.started .lbl { position: relative; padding-left: 32px; }
+.dl-btn.started .ico-ok { left: 0; opacity: 1; transform: none; }
+.dl-btn.started .dl-bar { animation: fill 1.6s var(--ease) forwards; }
+@keyframes fill { to { transform: scaleX(1); } }
+
+.file-info { margin-top: 18px; font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.warn { margin-top: 14px; padding: 12px 16px; border-radius: 16px; font-size: 14px; color: var(--muted); background: rgba(255,255,255,.05); border: 1px solid var(--stroke); }
+.warn a, .feedback a { color: #fff; border-bottom: 1px solid rgba(255,255,255,.4); }
+
+/* Инструкция после нажатия */
+.after {
+  text-align: left; overflow: hidden; max-height: 0; opacity: 0; margin-top: 0;
+  transition: max-height .9s var(--ease), opacity .8s var(--ease), margin .8s var(--ease);
+}
+.after.show { max-height: 340px; opacity: 1; margin-top: 34px; }
+.after h3 { text-align: center; margin-bottom: 14px; }
+.after ol { counter-reset: s; display: grid; gap: 10px; list-style: none; }
+.after li {
+  counter-increment: s; position: relative; padding: 14px 16px 14px 56px; border-radius: 18px;
+  font-size: 14.5px; color: var(--muted); background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.07);
+}
+.after li::before {
+  content: counter(s); position: absolute; left: 14px; top: 50%; translate: 0 -50%;
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--serif); font-style: italic; font-size: 17px; color: #000; background: #fff;
+}
+
+.feedback { margin-top: 30px; font-size: 14px; color: var(--muted); }
+
+@media (max-width: 560px) {
+  .back { top: 12px; left: 12px; }
+  .dl-card { border-radius: 32px; }
+}
